@@ -1,0 +1,16 @@
+button{
+    color:white;
+    background-color: royalblue;
+  }
+  .todo-title {
+    color: royalblue;
+    font-size: 48px; 
+    margin-bottom: 16px; 
+  }
+  .todo-container {
+      background-color: wheat;
+      padding: 300px;
+      border-radius: 25px;
+      
+    }
+  
