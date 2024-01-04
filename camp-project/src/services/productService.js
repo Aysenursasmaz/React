@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default class ProductService {
   getProducts() {
     return axios.get("http://localhost:8080/api/products/getAll");
   }
 
-  getByProductName(productName) {
+  getProductName(productName) {
     return axios.get(
-      "http://localhost:8080/api/products/getByProductName?productName=" +
+      "http://localhost:8080/api/products/getProductName?productName=" +
         productName
     );
   }

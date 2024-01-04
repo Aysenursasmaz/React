@@ -1,5 +1,6 @@
-import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import React from 'react';
+import { Dropdown, DropdownDivider, DropdownItem } from "semantic-ui-react";
+import { NavLink } from 'react-router-dom';
 
 export default function CartSummary() {
   return (

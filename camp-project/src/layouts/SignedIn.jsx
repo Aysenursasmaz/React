@@ -1,14 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Dropdown, Menu} from 'semantic-ui-react';
 
 export default function SignedIn({signOut}) {
   return (
     <div>
     <Menu.Item>
-      <Image
-        avatar
-        spaced="right"
-        src="https://images.app.goo.gl/cv579ihf1tUjte217"
-      />
+    
       <Dropdown pointing="top left" text="aysenur">
         <Dropdown.Menu>
           <Dropdown.Item text="My Information" icon="info" />
