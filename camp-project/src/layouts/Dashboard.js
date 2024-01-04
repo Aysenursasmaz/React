@@ -6,10 +6,12 @@ import CartDetail from '../pages/CartDetail';
 import Categories from './Categories';
 import ProductList from '../pages/ProductList';
 import { Grid } from 'semantic-ui-react';
+import { ToastContainer } from 'react-toastify';
 
 export default function Dashboard() {
   return (
     <div>
+      <ToastContainer position='bottom-right'/>
     <Grid>
       <Grid.Row>
         <Grid.Column width={4}>
