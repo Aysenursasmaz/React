@@ -8,6 +8,8 @@ import Footer from './components/Footer/Footer';
 import Cars from './pages/Cars/Cars';
 import Login from "./pages/Login/Login"
 import SignUp from './pages/Login/SignUp';
+import CarCard from './components/CarCard/CarCard';
+
 
 
 
@@ -23,10 +25,10 @@ function App() {
 			{ <Route path='cars' element={<Cars/>} /> }
 			<Route path='/login' element = {<Login/>}/>
 			<Route path='/singUp' element= {<SignUp/>}/>
-		
+		    
 		</Routes>
 		{ <div className="App">
-     	 <CarCard/>
+     	
    		 </div>}
 		<Footer/>
 	  </>

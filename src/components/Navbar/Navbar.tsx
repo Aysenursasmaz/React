@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar() {
+export default function Navbar() {
   const location = useLocation();
 
   return (
@@ -71,4 +71,4 @@ function Navbar() {
     </nav>
   );
 
-export default Navbar;
+  }

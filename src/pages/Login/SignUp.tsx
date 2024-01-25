@@ -8,9 +8,9 @@ import "./SignUp.css";
 import { Link } from "react-router-dom";
 
 interface FormValues {
-  email?: string;
-  password?: string;
-  role?: string;
+  email: string;
+  password: string;
+  role: string;
 }
 
 interface OtherProps {
@@ -18,10 +18,10 @@ interface OtherProps {
   ref?: any;
 }
 interface MyFormprops {
-  initialiEmail?: string;
-  initialPassword?: string;
-  initialRole?: string;
-  login?: any;
+  initialEmail: string;
+  initialPassword: string;
+  initialRole: string;
+  login: any;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
   const {
@@ -116,7 +116,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 };
 const SignUpForm = withFormik<MyFormprops, FormValues>({
   mapPropsToValues: (props) => ({
-    email: props.initialiEmail,
+    email: props.initialEmail,
     password: props.initialPassword,
     role: props.initialRole,
   }),
@@ -131,7 +131,7 @@ const SignUpForm = withFormik<MyFormprops, FormValues>({
 const SignUp: React.FC<{}> = (props: any) => {
   return (
     <div>
-      <SignUpForm/>
+      
     </div>
   );
 };

@@ -1,15 +1,17 @@
-import { Form, FormikProps, withFormik } from "formik";
+import { Field, Form, FormikProps, withFormik } from "formik";
 import { basicSchema } from "./LoginValidation";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import axios from "axios";
+import UserService from "../../services/abstracts/userService";
 
 
 interface FormValues {
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
 }
 
 interface OtherProps {
@@ -17,8 +19,8 @@ interface OtherProps {
   ref?: any;
 }
 interface MyFormprops {
-  initialiEmail?: string;
-  initialPassword?: string;
+  initialEmail: string;
+  initialPassword: string;
   login?: any;
 }
 const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
@@ -28,13 +30,33 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
     touched,
     handleChange,
     handleBlur,
-    handleSubmit,
+    handleSubmit:formikHandleSubmit,
     isSubmitting,
   } = props;
 
+   const handleSubmit = async ({ email, password }: FormValues) => {
+    try {
+      const response = await UserService.loginUser(email, password);
+
+      if (response.success) {
+        console.log('Login successful');
+        // Başarılı giriş durumunda başka işlemleri gerçekleştirin (örneğin, kullanıcıyı başka bir sayfaya yönlendirme)
+      } else {
+        console.error('Login failed:', response.message);
+        // Başarısız giriş durumunda kullanıcıya bir hata mesajı gösterebilirsiniz
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      // Hata durumunda kullanıcıya bir hata mesajı gösterebilirsiniz
+    }
+  }
+
+  
   return (
+    
     <div className="container ">
-        <Form onSubmit={handleSubmit} className="form card">
+      
+          <Form  onSubmit={formikHandleSubmit} className="form card">
         <div className="header">
           <div className="text">
             <FaUser />
@@ -49,7 +71,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
         <div className="inputs">
           <div className="input">
             <MdEmail className="icon-email" />
-            <input
+            <Field
               className="input"
               name="email"
               type="email"
@@ -57,7 +79,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
-            ></input>
+            ></Field>
           </div>
           {touched.email && errors.email && (
             <div className="invalid-feedback">{errors.email}</div>
@@ -65,7 +87,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
 
           <div className="input">
             <RiLockPasswordFill className="icon-password" />
-            <input
+            <Field
               className="input"
               name="password"
               type="password"
@@ -73,7 +95,7 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
-            ></input>
+            ></Field>
           </div>
           {touched.password && errors.password && (
             <div className="invalid-feedback">{errors.password}</div>
@@ -96,31 +118,34 @@ const InnerForm = (props: OtherProps & FormikProps<FormValues>) => {
             }
             type="submit"
             className="submit"
+            
           >
             Login
           </button>
         </div>
       </Form>
     </div>
+   
   );
+
 };
 const LoginForm = withFormik<MyFormprops, FormValues>({
   mapPropsToValues: (props) => ({
-    email: props.initialiEmail,
+    email: props.initialEmail,
     password: props.initialPassword,
   }),
   validationSchema: basicSchema,
-  handleSubmit({ email, password }: FormValues) {
-    console.log("Email", email);
-    console.log("Password", password);
+  handleSubmit: (values, { setSubmitting })=> {
+   setSubmitting(false);
   },
 })(InnerForm);
 
-const Login: React.FC<{}> = (props: any) => {
+const Login: React.FC<MyFormprops> = (props: MyFormprops) => {
   return (
     <div>
-      <LoginForm />
+      <LoginForm {... props} />
     </div>
+    
   );
 };
 
